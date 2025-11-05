@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Parichay 3.1 — Event Rules</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#05060a; --muted:#9aa6b2; --accent:#60a5fa; --glass: rgba(255,255,255,0.04);
+    }
+    html,body{ margin:0; padding:0; background: #05060a; color:#e6eef8; font-family:'Poppins',sans-serif; overflow-x:hidden; }
+    #three-canvas{ position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; }
+    .nav{ position:fixed; top:18px; left:50%; transform:translateX(-50%); z-index:40; background:rgba(255,255,255,0.08); padding:10px 20px; border-radius:999px; display:flex; gap:18px; align-items:center; backdrop-filter:blur(12px); box-shadow:0 6px 30px rgba(2,6,23,0.6); flex-wrap:wrap; max-width:95vw; justify-content:center; }
+    .nav a{ color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; transition: all 0.3s; font-size:14px; white-space:nowrap; }
+    .nav a:hover{ color:white; }
+    .nav a.cta{ color:white; background:linear-gradient(90deg,var(--accent), #7dd3fc); }
+    .container{ position:relative; z-index:10; max-width:1100px; margin:120px auto 60px; padding:28px; background:rgba(5,6,10,0.3); border-radius:16px; box-shadow:0 6px 30px rgba(2,6,23,0.5); backdrop-filter:blur(8px); border: 1px solid rgba(96,165,250,0.2); width:90%; }
+    @media(max-width:768px){
+      .container{ margin:100px auto 40px; padding:20px; width:92%; }
+      h1{ font-size:32px; }
+      h2{ font-size:20px; }
+       .nav{
+        left:12px;
+        right:12px;
+        transform:none;
+        top:10px;
+        padding:8px 12px;
+        gap:10px;
+        border-radius:14px;
+        backdrop-filter: blur(8px);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+      }
+      .nav > div:first-child{ display:flex; align-items:center; gap:10px; min-width:0 }
+      .nav img{
+        width:36px;
+        height:36px;
+        border-radius:10px;
+        transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
+        box-shadow: 0 8px 20px rgba(96,165,250,0.12);
+        flex-shrink:0;
+      }
+      .nav strong{ font-size:14px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px }
+      .nav a{
+        font-size:13px;
+        padding:6px 8px;
+        border-radius:8px;
+        color:var(--muted);
+        margin:2px 0;
+        display:inline-block;
+      }
+      .nav a.cta{
+        padding:6px 10px;
+        font-size:14px;
+        border-radius:10px;
+      }
+      .event-box{ padding:15px; }
+      ul li{ font-size:14px; }
+    }
+    @media(max-width:480px){
+      h1{ font-size:26px; }
+      h2{ font-size:18px; }
+      .container{ padding:15px; margin:90px auto 30px; }
+      .nav{
+        left:12px;
+        right:12px;
+        transform:none;
+        top:10px;
+        padding:8px 12px;
+        gap:10px;
+        border-radius:14px;
+        backdrop-filter: blur(8px);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+      }
+      .nav > div:first-child{ display:flex; align-items:center; gap:10px; min-width:0 }
+      .nav img{
+        width:36px;
+        height:36px;
+        border-radius:10px;
+        transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
+        box-shadow: 0 8px 20px rgba(96,165,250,0.12);
+        flex-shrink:0;
+      }
+      .nav strong{ font-size:14px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px }
+      .nav a{
+        font-size:13px;
+        padding:6px 8px;
+        border-radius:8px;
+        color:var(--muted);
+        margin:2px 0;
+        display:inline-block;
+      }
+      .nav a.cta{
+        padding:6px 10px;
+        font-size:14px;
+        border-radius:10px;
+      }
+      ul li{ font-size:13px; }
+    }
+    h1{ font-family:'Montserrat'; font-size:35px; font-weight:800; text-align:center; margin-bottom:20px; text-shadow: 0 0 20px rgba(96,165,250,0.5); }
+    .event-box{
+      margin-bottom:16px;
+      padding:12px;
+      border-radius:8px;
+      background:rgba(5,6,10,0.35);
+      border: 1px solid rgba(96,165,250,0.15);
+      transition: transform 0.2s, background 0.2s;
+      backdrop-filter: blur(4px);
+      font-size:14px;
+    }
+    .event-box:hover{ background:rgba(5,6,10,0.5); border-color: rgba(96,165,250,0.4); transform: translateY(-2px); }
+    h2{ font-family:'Montserrat'; font-size:24px; margin-bottom:10px; color: #60a5fa; }
+    ul{ margin:0; padding-left:22px; }
+    ul li{ margin-bottom:6px; color:var(--muted); }     
+    footer{ position:relative; z-index:10; text-align:center; padding:20px; color:var(--muted); font-size:14px; margin-top:30px; }
+  </style>
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+ <nav class="nav" aria-label="Main">
+    <div style="display:flex;align-items:center;gap:12px">
+      <img src="aiminds.png" alt="" style="width:34px;height:34px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#7dd3fc);box-shadow:0 6px 14px rgba(96,165,250,0.12);transform-origin:left center;transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms; cursor:pointer" onmouseenter="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'" ontouchstart="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" ontouchend="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'" tabindex="0" onfocus="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" onblur="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'">
+      <strong style="color:#fff">Parichay 3.1</strong>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <a href="index.html">Home</a>
+
+      <a href="coordinators.html">Coordinators</a>
+      <a class="cta" href="https://forms.gle/ZBdw6NfDqom4BhYL8">Register</a>
+    </div>
+  </nav>
+<div class="container">
+  <h1>Event Rules</h1>
+
+  <div class="event-box">
+    <h2>Rules to Follow</h2>
+    <ul>
+      <li>Each participant can take part in only one solo event and one team event.</li>
+      <li>Participants must carry their college ID card at all times.</li>
+      <li>Any kind of misconduct or cheating will result in disqualification.</li>
+      <li>Teams/participants failing to report on time will be disqualified automatically.</li>
+      <li>Decisions made by the judges will be final and binding.</li>
+      <li>Participants must maintain discipline and follow campus rules.</li>
+      <li>Damage to college property will lead to penalty and disciplinary action.</li>
+      <li>The organizing team reserves the right to change event timings or rules if needed.</li>
+    </ul>
+  </div>
+
+  <div class="event-box">
+    <h2>UNTANGLE THE TANGLE</h2>
+    <ul>
+      <li>Each team must consist of 2 members(from the same or different departments).</li>
+      <li>Open to all TJIT students interested in coding and problem-solving.</li>
+      <li>Usage of phones, laptops, books, or the internet is strictly prohibited during the event.</li>
+      <li>Any kind of malpractice will lead to immediate disqualification.</li>
+      <li>Any kind of malpractice leads to immediate disqualification.</li>
+      <li>Decisions made by the judges are final and binding.</li>
+      <li>Tiebreakers (if needed) will be decided by an additional coding challenge.</li>
+      <li>Teams must report 10 minutes before the competition begins.</li>
+      <li>Late entries will not be entertained once the round starts.</li>
+      <li>Code must be written in the provided coding environment.</li>
+      <li>Time limits for each round must be strictly adhered to.</li>
+    </ul>
+  </div>
+
+  <div class="event-box">
+    <h2>QUIZATHON</h2>
+    <ul>
+      <li>2 members per team (from the same or different departments).</li>
+      <li>Open to all TJIT students interested in technology</li>
+      <li>No external help allowed during competition.</li>
+      <li>Use of electronic devices, books, or internet during the quiz is strictly prohibited.</li>
+      <li>Any kind of malpractice leads to immediate disqualification.</li>
+      <li>Decisions made by the quiz master/judges are final and binding.</li>
+      <li>Tiebreakers (if needed) will be decided by an extra round of questions.</li>
+      <li>Teams must report 10 minutes before the quiz begins.</li>
+      <li>Late entries will not be entertained once the round starts.</li>
+      <li>For written rounds, answers must be marked clearly.</li>
+      <li>For buzzer or oral rounds, answers must be given within the time limit.</li>
+    </ul>
+  </div>
+
+  <div class="event-box">
+    <h2>COOK LIKE A LOCAL</h2>
+    <ul>
+      <li>2 members per team</li>
+      <li>No use of fire or electrical appliances (like stove, microwave, or induction).</li>
+      <li>Only raw ingredients or ready-to-eat items are allowed.</li>
+      <li>Participants must bring their own ingredients and utensils.</li>
+      <li>Cleanliness and hygiene must be maintained throughout.</li>
+      <li>Presentation and creativity are important; decorate your dish attractively.</li>
+      <li>Participants must explain the name, ingredients, and preparation method of their dish to the judges.</li>
+      <li>Use of healthy and eco-friendly ingredients is encouraged.</li>
+      <li>Plagiarism (copying others) is not allowed.</li>
+      <li>Judges decision will be final and binding.</li>
+    </ul>
+  </div>
+
+  <div class="event-box">
+    <h2>OBSTACRUSH</h2>
+    <ul>
+      <li>4 members per team; no changes after registration.</li>
+      <li>Teams must stay together, no splitting.</li>
+      <li>No tampering with or removing other team's clues.</li>
+      <li>No phones, internet or external help unless allowed.</li>
+      <li>Fair play is mandatory — cheating = disqualification.</li>
+      <li>No unsafe or illegal actions.</li>
+      <li>Inform organizers immediately if anyone is injured.</li>
+      <li>Organizer's decision is final.</li>
+    </ul>
+  </div>
+
+  <div class="event-box">
+    <h2>PHOTOGRAPHY</h2>
+    <ul>
+      <li>Open to all registered participants.
+      <li>Theme will be given on-spot.</li>
+      <li>Only 1 photo per participant.</li>
+      <li>Participants must bring their own cameras or smartphones.</li>
+      <li>Photo must be clicked during the event.</li>
+      <li>Photo must be submitted within an hour after the event starts.</li>
+      <li>Only basic editing allowed (crop, brightness, color correction).</li>
+      <li>No AI-generated or stock images.</li>
+      <li>Do not disturb others or violate privacy.</li>
+      <li>Judges' decisions are final and binding.</li>
+      <li>No unsafe or prohibited activities.</li>
+    </ul>
+</div>
+<div class="event-box">
+    <h2>FREEFIRE</h2>
+    <ul>
+      <li>Each team consists of 4 players only (no substitutes).</li>
+      <li>Only Android and iOS devices are allowed.</li>
+      <li>Emulators and iPads are strictly prohibited.</li>
+      <li>Any use of game-modifying tools will lead to disqualification.</li>
+      <li>In-game voice chat is mandatory for proper team coordination.</li>
+      <li>Use of unfair means such as aimbot, trigger bot, or ESP will result in immediate disqualification.</li>
+      <li>Bug exploitation or any act that hinders fair play will lead to disqualification.</li>
+      <li>Players must join 15 minutes before the match starts.</li>
+      <li>In case of a tie, the number of Booyahs (wins) will decide the champion.</li>
+    </ul>
+</div>
+</div>
+<footer> © 2025 Parichay Tech Fest | Organized by AIML department. </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+let scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x05060a, 200, 1000);
+
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 2000);
+camera.position.z = window.innerWidth < 768 ? 400 : 300;
+
+let renderer = new THREE.WebGLRenderer({canvas: document.getElementById('three-canvas'), alpha: true, antialias: true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// Enhanced starfield
+let starGeometry = new THREE.BufferGeometry();
+let starCount = 3000;
+let starPositions = new Float32Array(starCount * 3);
+let starColors = new Float32Array(starCount * 3);
+for(let i = 0; i < starCount; i++){
+  starPositions[i*3] = (Math.random() - 0.5) * 2000;
+  starPositions[i*3+1] = (Math.random() - 0.5) * 2000;
+  starPositions[i*3+2] = (Math.random() - 0.5) * 2000;
+  
+  let brightness = Math.random() * 0.5 + 0.5;
+  starColors[i*3] = 0.4 + brightness * 0.6;
+  starColors[i*3+1] = 0.6 + brightness * 0.4;
+  starColors[i*3+2] = 0.9 + brightness * 0.1;
+}
+starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+let starMaterial = new THREE.PointsMaterial({
+  size: 2.5,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.8
+});
+let stars = new THREE.Points(starGeometry, starMaterial);
+scene.add(stars);
+
+// Large glowing spheres
+let spheres = [];
+let sphereData = [
+  {size: 40, x: -200, y: 150, z: -100, color: 0x60a5fa},
+  {size: 35, x: 250, y: -100, z: -150, color: 0x7dd3fc},
+  {size: 30, x: -150, y: -150, z: -80, color: 0x3b82f6},
+  {size: 45, x: 180, y: 120, z: -120, color: 0x93c5fd},
+  {size: 38, x: 0, y: -80, z: -200, color: 0x60a5fa},
+];
+
+sphereData.forEach(data => {
+  let geo = new THREE.IcosahedronGeometry(data.size, 1);
+  let mat = new THREE.MeshBasicMaterial({
+    color: data.color,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.6
+  });
+  let sphere = new THREE.Mesh(geo, mat);
+  sphere.position.set(data.x, data.y, data.z);
+  scene.add(sphere);
+  spheres.push({
+    mesh: sphere,
+    baseX: data.x,
+    baseY: data.y,
+    baseZ: data.z,
+    rotSpeed: Math.random() * 0.005 + 0.002,
+    floatSpeed: Math.random() * 0.002 + 0.001,
+    floatOffset: Math.random() * Math.PI * 2
+  });
+});
+
+// Add glowing particles around spheres
+let particleGeometry = new THREE.BufferGeometry();
+let particleCount = 500;
+let particlePositions = new Float32Array(particleCount * 3);
+for(let i = 0; i < particleCount * 3; i++){
+  particlePositions[i] = (Math.random() - 0.5) * 800;
+}
+particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+let particleMaterial = new THREE.PointsMaterial({
+  color: 0x60a5fa,
+  size: 3,
+  transparent: true,
+  opacity: 0.6,
+  blending: THREE.AdditiveBlending
+});
+let particles = new THREE.Points(particleGeometry, particleMaterial);
+scene.add(particles);
+
+// Mouse tracking
+let mouse = new THREE.Vector2();
+let targetMouse = new THREE.Vector2();
+let isMobile = window.innerWidth < 768;
+
+window.addEventListener('mousemove', (e)=>{
+  if(!isMobile){
+    targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  }
+});
+
+// Touch support for mobile
+window.addEventListener('touchmove', (e)=>{
+  if(isMobile && e.touches.length > 0){
+    targetMouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+    targetMouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+  }
+});
+
+// Animation
+let time = 0;
+function animate(){
+  requestAnimationFrame(animate);
+  time += 0.01;
+  
+  // Smooth mouse follow
+  mouse.x += (targetMouse.x - mouse.x) * 0.05;
+  mouse.y += (targetMouse.y - mouse.y) * 0.05;
+  
+  // Rotate stars slowly
+  stars.rotation.y += 0.0003;
+  stars.rotation.x += 0.0001;
+  
+  // Animate particles
+  particles.rotation.y += 0.001;
+  particles.rotation.x = Math.sin(time * 0.3) * 0.1;
+  
+  // Animate spheres with floating and rotation
+  spheres.forEach((s, i)=>{
+    s.mesh.rotation.x += s.rotSpeed;
+    s.mesh.rotation.y += s.rotSpeed * 1.5;
+    
+    // Floating effect
+    s.mesh.position.y = s.baseY + Math.sin(time * s.floatSpeed + s.floatOffset) * 30;
+    s.mesh.position.x = s.baseX + Math.cos(time * s.floatSpeed * 0.7) * 20;
+    
+    // Mouse reactive movement
+    s.mesh.position.x += (mouse.x * 80 - (s.mesh.position.x - s.baseX)) * 0.02;
+    s.mesh.position.y += (mouse.y * 60 - (s.mesh.position.y - s.baseY)) * 0.02;
+    
+    // Pulse effect
+    let scale = 1 + Math.sin(time * 2 + i) * 0.05;
+    s.mesh.scale.set(scale, scale, scale);
+  });
+  
+  // Camera movement
+  camera.position.x += (mouse.x * 30 - camera.position.x) * 0.02;
+  camera.position.y += (mouse.y * 30 - camera.position.y) * 0.02;
+  camera.lookAt(scene.position);
+  
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+  isMobile = window.innerWidth < 768;
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.position.z = isMobile ? 400 : 300;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

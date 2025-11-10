@@ -266,55 +266,57 @@
       }
     }
 
-   @media (max-width:480px){ 
-  .nav{ 
-    left: 12px;
-    right: 12px;
+  @media (max-width:400px){
+  .nav { 
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    top: 10px;
     transform: none;
-    top: 20px;
-    padding: 8px 20px;
-    gap: 14px;
-    border-radius: 14px;
+    padding: 6px 10px;
+    gap: 6px;
+    border-radius: 12px;
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: nowrap; /* ✅ keep in one line */
-    box-shadow: 0 10px 30px rgba(2,6,23,0.55);
-    overflow: hidden; /* ✅ prevents accidental wrap */
-    white-space: nowrap; /* ✅ ensures text doesn’t break */
-    
+    flex-wrap: nowrap;              /* ✅ single line */
+    box-shadow: 0 8px 24px rgba(2,6,23,0.55);
+    overflow: hidden;               /* ✅ no wrap overflow */
+    white-space: nowrap;            /* ✅ prevent text wrapping */
+    z-index: 50;
   }
 
   .nav img { 
-    width: 42px;               /* bigger logo */
-    height: 42px;
+    width: 30px;                    /* ✅ smaller logo for compact fit */
+    height: 30px;
     border-radius: 8px;
-    flex-shrink: 0; /* ✅ prevents logo from shrinking */
+    flex-shrink: 0;                 /* ✅ prevents shrinking */
   }
 
   .nav strong, .nav-title { 
-    font-size: 16px; 
-    font-weight: 800;
+    font-size: 14px;                /* ✅ smaller title */
+    font-weight: 700;
     white-space: nowrap;
   }
 
   .nav a { 
-     font-size:13px;
-        padding:6px 8px;
-        border-radius:8px;
-        color:var(--muted);
-        margin:2px 0;
-        display:inline-block;
+    font-size: 12px;                /* ✅ slightly smaller links */
+    padding: 4px 6px;
+    border-radius: 6px;
+    color: var(--muted);
+    display: inline-block;
+    flex-shrink: 0;
   }
 
   .nav .cta { 
-    font-size: 13px;
-    padding: 3px 6px;
+    font-size: 12px;
+    padding: 4px 8px;
     border-radius: 8px;
     background: linear-gradient(90deg,#60a5fa,#93c5fd);
     color: #041029;
-    box-shadow: 0 4px 10px rgba(96,165,250,0.25);
+    box-shadow: 0 3px 8px rgba(96,165,250,0.25);
+    flex-shrink: 0;                 /* ✅ keeps button visible */
   }
 
   header{ 
@@ -377,7 +379,7 @@
   <nav class="nav" aria-label="Main">
     <div style="display:flex;align-items:center;gap:12px">
       <img src="aiminds.png" alt="" style="width:34px;height:34px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#7dd3fc);box-shadow:0 6px 14px rgba(96,165,250,0.12);transform-origin:left center;transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms; cursor:pointer" onmouseenter="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'" ontouchstart="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" ontouchend="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'" tabindex="0" onfocus="this.style.transform='scale(3)'; this.style.boxShadow='0 30px 60px rgba(96,165,250,0.18)'" onblur="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 14px rgba(96,165,250,0.12)'">
-      <strong style="color:#fff"></strong>
+      <strong style="color:#fff">Parichay 3.1</strong>
     </div>
     <div style="display:flex;gap:8px;align-items:center">
       <a href="index.html">Home</a>
@@ -681,6 +683,4 @@
   });
   </script>
 </body>
-
 </html>
-

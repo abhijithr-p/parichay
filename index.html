@@ -227,6 +227,44 @@
       position:relative;
       z-index:5;
     }
+    @media (max-width:480px) {
+  .navbar {
+    top: 10px;
+    padding: 6px 14px;        /* smaller padding */
+    border-radius: 12px;      /* slightly tighter corners */
+    gap: 10px;                /* less space between logo and links */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  .nav-left {
+    gap: 6px;                 /* smaller gap between logo & title */
+  }
+
+  .nav-logo {
+    width: 28px;              /* smaller logo */
+    height: 28px;
+    border-radius: 8px;
+  }
+
+  .nav-title {
+    font-size: 13px;          /* smaller text */
+  }
+
+  .nav-links {
+    gap: 10px;                /* reduce spacing between links */
+  }
+
+  .nav-link {
+    font-size: 12px;          /* smaller link text */
+  }
+
+  .nav-btn {
+    font-size: 12px;          /* smaller button text */
+    padding: 4px 10px;        /* smaller button */
+    border-radius: 8px;
+  }
+}
+
   </style>
 </head>
 

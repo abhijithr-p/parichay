@@ -266,62 +266,96 @@
       }
     }
 
-    @media (max-width:480px){ 
-      .nav{ 
-        left:12px;
-        right:12px;
-        transform:none;
-        top:10px;
-        padding:8px 12px;
-        gap:10px;
-        border-radius:14px;
-        backdrop-filter: blur(8px);
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        flex-wrap:wrap;
-        box-shadow: 0 10px 30px rgba(2,6,23,0.55);
-      }
-      .nav a{ 
-        font-size:11px; 
-        padding:4px 6px; 
-      }
-      .nav strong{ 
-        font-size:13px; 
-      }
-      .nav img{ 
-         width:36px;
-        height:36px;
-        border-radius:10px;
-        transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
-        box-shadow: 0 8px 20px rgba(96,165,250,0.12);
-        flex-shrink:0;
-      }
-      
-      header{ 
-        margin:120px auto 18px; 
-        padding:0 15px; 
-      }
-      h1.title{ 
-        font-size:24px; 
-      }
-      p.subtitle{ 
-        font-size:13px; 
-      }
-      
-      .tab{ 
-        font-size:12px; 
-        padding:7px 10px; 
-      }
-      
-      .grid{ 
-        grid-template-columns:1fr; 
-        gap:12px; 
-      }
-      .section{ 
-        padding:0 15px; 
-      }
-    }
+   @media (max-width:480px){ 
+  .nav{ 
+    left: 12px;
+    right: 12px;
+    transform: none;
+    top: 20px;
+    padding: 8px 20px;
+    gap: 14px;
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* ✅ keep in one line */
+    box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+    overflow: hidden; /* ✅ prevents accidental wrap */
+    white-space: nowrap; /* ✅ ensures text doesn’t break */
+    
+  }
+
+  .nav img { 
+    width: 42px;               /* bigger logo */
+    height: 42px;
+    border-radius: 8px;
+    flex-shrink: 0; /* ✅ prevents logo from shrinking */
+  }
+
+  .nav strong, .nav-title { 
+    font-size: 16px; 
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .nav a { 
+    font-size: 15px; 
+    padding: 4px 7px; 
+    white-space: nowrap;
+  }
+
+  .nav .cta { 
+    font-size: 13px;
+    padding: 3px 6px;
+    border-radius: 8px;
+    background: linear-gradient(90deg,#60a5fa,#93c5fd);
+    color: #041029;
+    box-shadow: 0 4px 10px rgba(96,165,250,0.25);
+  }
+
+  header{ 
+    margin: 120px auto 18px; 
+    padding: 0 15px; 
+  }
+  h1.title{ 
+    font-size: 24px; 
+  }
+  p.subtitle{ 
+    font-size: 13px; 
+  }
+  .ph {
+    width: 60%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    object-fit: cover;
+    margin: 0 auto;           /* centers image */
+    display: block;
+  }
+
+  .tab{ 
+    font-size: 12px; 
+    padding: 7px 10px; 
+  }
+   .meta .name {
+    font-size: 15px;     /* ⬆ increase name text size */
+    font-weight: 800;
+  }
+
+  .meta .role {
+    font-size: 13px;     /* ⬆ increase role text size */
+    font-weight: 600;
+  }
+
+  .grid{ 
+    grid-template-columns:1fr; 
+    gap: 12px; 
+  }
+  .section{ 
+    padding: 0 15px; 
+  }
+}
+
   </style>
 </head>
 <body>
@@ -340,7 +374,7 @@
   </nav>
 
   <header>
-    <h1 class="title">Humans behind Parichay 3.1</h1>
+    <h1 class="title">Team behind Parichay 3.1</h1>
     <p class="subtitle">Innovation begins with people. Need guidance, have ideas, or just curious to explore? Meet the minds powering Parichay.</p>
     <img src="chittu.png" alt="" class="mascot" style="left:1100px !important"/>
     <div class="tabs" id="tabs">
@@ -395,8 +429,12 @@
         <div class="meta"><span class="name">Ivin K S</span><span class="role">OBSTACRUSH</span></div>
       </div>
       <div class="card group-mentors" hidden>
-        <img class="ph" src="pojjitha.jpg" alt=""/>
-        <div class="meta"><span class="name">Poojitha </span><span class="role">COOK LIKE A LOCAL</span></div>
+        <img class="ph" src="chandana.jpg" alt=""/>
+        <div class="meta"><span class="name">Chandana S</span><span class="role">COOK LIKE A LOCAL</span></div>
+      </div>
+      <div class="card group-mentors" hidden>
+        <img class="ph" src="harsha.jpg" alt=""/>
+        <div class="meta"><span class="name">Harsha</span><span class="role">FREE FIRE</span></div>
       </div>
     
       

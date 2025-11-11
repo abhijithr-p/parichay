@@ -93,21 +93,23 @@
     }
 
     /* cute floating mascot sticker */
-    .mascot{ 
-      position:absolute; 
-      right:40px; 
-      top:-20px; 
-      width:min(22vw,180px); 
-      aspect-ratio:1; 
-      filter:drop-shadow(0 10px 30px rgba(96,165,250,.4)); 
-      animation: floaty 6s ease-in-out infinite; 
-      pointer-events:none;
-      z-index:5;
-      left:auto !important;
-    }
-    @keyframes floaty{ 
-      0%,100%{ transform:translateY(0) rotate(-2deg) } 
-      50%{ transform:translateY(-10px) rotate(2deg) } 
+    .mascot { 
+  position:absolute; 
+  right:40px; 
+  top:-20px; 
+  width:min(22vw,180px); 
+  aspect-ratio:1; 
+  filter:drop-shadow(0 10px 30px rgba(96,165,250,.4)); 
+  animation: floaty 6s ease-in-out infinite; 
+  pointer-events:none;
+  z-index:5;
+  transition: all 0.4s ease;
+}
+
+/* ✨ Floating animation */
+@keyframes floaty { 
+  0%,100% { transform: translateY(0) rotate(-2deg); } 
+  50% { transform: translateY(-10px) rotate(2deg); } 
     }
 
     /* Tabs */
@@ -239,10 +241,12 @@
       p.subtitle{ 
         font-size:14px; 
       }
-      .mascot{ 
-        display:none; 
-      }
-      
+      .mascot {
+    right: 10px;              /* move closer to edge */
+    top: 0px;
+    width: min(30vw, 130px);
+  }
+
       .tabs{ 
         gap:8px; 
       }
@@ -266,26 +270,26 @@
       }
     }
 
-  @media (max-width:400px){
+  @media (max-width:480px){
   .nav { 
     position: fixed;
-    left: 8px;
-    right: 8px;
-    top: 10px;
+    top: 12px;
+    left: 10px;
+    right: 10px;
     transform: none;
-    padding: 6px 10px;
-    gap: 6px;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: 14px;
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: nowrap;              /* ✅ single line */
-    box-shadow: 0 8px 24px rgba(2,6,23,0.55);
-    overflow: hidden;               /* ✅ no wrap overflow */
-    white-space: nowrap;            /* ✅ prevent text wrapping */
+    flex-wrap: nowrap;            /* ✅ Keep in one line */
+    gap: 8px;
+    box-shadow: 0 8px 25px rgba(2,6,23,0.55);
+    overflow: hidden;             /* ✅ Prevents line breaks */
+    white-space: nowrap;          /* ✅ No wrapping */
     z-index: 50;
-  }
+  }      
 
   .nav img { 
     width: 30px;                    /* ✅ smaller logo for compact fit */
@@ -336,6 +340,16 @@
     object-fit: cover;
     margin: 0 auto;           /* centers image */
     display: block;
+  }
+  .mascot {
+    position: relative;       /* move into layout flow */
+    display: block;
+    margin: 20px auto 0;      /* center horizontally */
+    width: 100px;             /* smaller for mobile */
+    top: 0;
+    right: 50;
+    left: 0;
+    animation: floaty 5s ease-in-out infinite;
   }
 
   .tab{ 
@@ -445,11 +459,11 @@
       </div>
       <div class="card group-mentors" hidden>
         <img class="ph" src="chandana.jpg" alt=""/>
-        <div class="meta"><span class="name">Chandana K</span><span class="role">COOK LIKE A LOCAL</span></div>
+        <div class="meta"><span class="name">Chandana S</span><span class="role">COOK LIKE A LOCAL</span></div>
       </div>
       <div class="card group-mentors" hidden>
         <img class="ph" src="harsha.jpg" alt=""/>
-        <div class="meta"><span class="name">Sri Harsha</span><span class="role">FREE FIRE</span></div>
+        <div class="meta"><span class="name">Harsha</span><span class="role">FREE FIRE</span></div>
       </div>
     
       
@@ -683,5 +697,4 @@
   });
   </script>
 </body>
-
 </html>

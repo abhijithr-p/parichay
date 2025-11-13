@@ -1,197 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Curtain Opening Effect</title>
-    <style>
-        body {
-            background-image:url("background.jpg");
-            background-color: #f4f4f4;
-            color: #333333;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-        }
-        .stage {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .curtain {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background-color: #005f73;
-            z-index: 2;
-            transition: all 2s ease-in-out;
-            background-image: radial-gradient(circle, #005f73, #04404b 60%);
-            background-size: 200% 200%;
-            animation: waveEffect 4s infinite;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        @keyframes waveEffect {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        .left-curtain {
-            left: 0;
-            border-right: 2px solid #04404b;
-        }
-        .right-curtain {
-            right: 0;
-            border-left: 2px solid #04404b;
-        }
-        .stage.open .left-curtain {
-            transform: translateX(-100%);
-        }
-        .stage.open .right-curtain {
-            transform: translateX(100%);
-        }
-        .content {
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-        }
-        button {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        header {
-            background: linear-gradient(90deg, #005f73, #0a9396);
-            padding: 50px;
-            border-radius: 10px;
-            margin: 20px;
-            box-shadow: 0 0 15px rgba(0, 95, 115, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            position: relative;
-        }
-        .nav {
-            display: flex;
-            justify-content: space-between; 
-            align-items: center; 
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .nav a {
-            color: #005f73;
-            text-decoration: none;
-            font-size: 18px;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        .nav a:hover {
-            color: #0a9396;
-        }
-        section {
-            background: #ffffff;
-            padding: 20px;
-            margin: 10px auto;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-        }
-        section:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        .logo1 {
-            width: 250px;
-            height: auto;
-            position: absolute;
-            top: 10px;
-        }
-        h1 {
-            background: linear-gradient(90deg, #ffffff, #ffffff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 55px;
-            font-family: 'Pixel Operator', monospace;
-            font-weight: bold;
-            align-content: center;
-        }
-        h2, h3 {
-            font-family: 'Poppins', sans-serif;
-            color: #005f73;
-        }
-        p {
-            font-family: 'Poppins', sans-serif;
-            color: #333333;
-            text-align: justify;
-        }
-        .button {
-            background: linear-gradient(90deg, #0b5261, #05a792);
-            padding: 10px 20px;
-            border: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 95, 115, 0.5);
-            transition: 0.3s;
-        }
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 95, 115, 0.7);
-        }
-        footer {
-            background: #005f73;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 10px;
-            color: white;
-        }
-        
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCASTEM-2025 | Curtain Reveal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #001219, #003049, #000814);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", sans-serif;
+      color: #ffffff;
+    }
+
+    /* ===== Stage ===== */
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* ===== SVG Canvas for Realistic Curtains ===== */
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+    }
+
+    /* ===== Center Content ===== */
+    .content {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .content h1 {
+      font-size: 72px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      /* ✅ Updated to GOLD gradient */
+      background: linear-gradient(90deg, #ffd60a, #ffc300, #ffba08);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      animation: fadeIn 2s ease-in-out;
+      text-shadow: 0 0 20px rgba(255, 213, 0, 0.3);
+    }
+
+    .content h2 {
+      font-size: 22px;
+      color: #caf0f8;
+      margin-top: 10px;
+      animation: fadeIn 3s ease-in-out;
+      text-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Button ===== */
+    #inaugurateButton {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      padding: 16px 48px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(0, 183, 255, 0.5);
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    #inaugurateButton:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.8);
+    }
+
+    #inaugurateButton.hidden {
+      display: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 25px rgba(255, 21, 0, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(255, 0, 0, 0.6); }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="stage" id="stage">
-        <div class="curtain left-curtain"></div>
-        <div class="curtain right-curtain"></div>
-        <button id="inaugurateButton" onclick="openCurtains(); this.style.display='none';" style="background: linear-gradient(90deg, #0b5261, #05a792); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 15px; color: #f4f4f4;">INAUGURATE</button>
-        <div class="content"><h2>Welcome to PARICHAY 3.1</h2></div>
-        </div>
-        
-        
+  <div class="stage" id="stage">
+    <svg id="curtainSvg" preserveAspectRatio="none" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="leftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#5e0029;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#5e0029;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#490026;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="rightGrad" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" style="stop-color:#5e0029;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#5e0029;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#490026;stop-opacity:1" />
+        </linearGradient>
+
+        <filter id="clothShadow">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.4"/>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+
+      <!-- LEFT CURTAIN -->
+      <g id="leftCurtain">
+        <path id="leftPath" d="M 0,0 L 50,0 L 50,100 Q 48,95 46,100 Q 44,90 42,100 Q 40,93 38,100 Q 36,96 34,100 Q 32,91 30,100 Q 28,94 26,100 Q 24,92 22,100 Q 20,95 18,100 Q 16,89 14,100 Q 12,97 10,100 Q 8,93 6,100 Q 4,91 2,100 Q 0,95 0,100 Z" 
+              fill="url(#leftGrad)" />
+      </g>
+
+      <!-- RIGHT CURTAIN -->
+      <g id="rightCurtain">
+        <path id="rightPath" d="M 100,0 L 50,0 L 50,100 Q 52,95 54,100 Q 56,90 58,100 Q 60,93 62,100 Q 64,96 66,100 Q 68,91 70,100 Q 72,94 74,100 Q 76,92 78,100 Q 80,95 82,100 Q 84,89 86,100 Q 88,97 90,100 Q 92,93 94,100 Q 96,91 98,100 Q 100,95 100,100 Z"
+              fill="url(#rightGrad)" />
+      </g>
+    </svg>
+
+    <div class="content">
+      <h1>Parichay 3.1</h1>
+      <h2>TechFest Organized by AIML Department TJIT</h2>
+    </div>
+
+    <button id="inaugurateButton" onclick="openCurtains()">INAUGURATE</button>
+  </div>
+
+  <script>
+    const svg = document.getElementById('curtainSvg');
+    let isOpen = false;
+
+    function openCurtains() {
+      if (isOpen) return;
+      isOpen = true;
       
-        
-    
+      document.getElementById("inaugurateButton").classList.add("hidden");
 
-    <script>
-        function openCurtains() {
-            const stage = document.getElementById('stage').classList.add('open');
-            setTimeout(() => {
-                window.location.href = 'index.html'; // Replace with your target page URL
-            }, 3000); // Matches the curtain animation duration (2 seconds)
-        }
-    </script>
+      const leftCurtain = document.getElementById("leftCurtain");
+      const rightCurtain = document.getElementById("rightCurtain");
+
+      leftCurtain.style.transition = "transform 2.8s cubic-bezier(0.7, 0, 0.3, 1)";
+      leftCurtain.style.transform = "translateX(-110%)";
+
+      rightCurtain.style.transition = "transform 2.8s cubic-bezier(0.7, 0, 0.3, 1)";
+      rightCurtain.style.transform = "translateX(110%)";
+
+      /* ✅ Redirect to index.html instead of Google site */
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
+    }
+  </script>
 </body>
-
 </html>
